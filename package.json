@@ -1,6 +1,5 @@
 {
   "name": "@luminiadev/bridge-workspace",
-  "private": true,
   "workspaces": [
     "packages/*"
   ],
