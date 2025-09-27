@@ -3,8 +3,8 @@ import {
     BridgeUnknownPacketSerializer
 } from './packet';
 import { BridgeCodecBuilder } from './bridge-codec-builder';
-import ByteBuffer from "bytebuffer";
 import { BridgeCodecException } from "../../exception/bridge-codec-exception";
+import ByteBuffer from "bytebuffer";
 
 export class BridgeCodec {
     private readonly packetsById = new Map<string, BridgePacketDefinition<any>>();
