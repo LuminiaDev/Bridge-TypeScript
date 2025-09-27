@@ -1,0 +1,21 @@
+{
+  "name": "@luminiadev/bridge-workspace",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces",
+    "publish:all": "npm run build && npm publish --workspaces"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@types/bytebuffer": "^5.0.49",
+    "bytebuffer": "^5.0.1",
+    "rimraf": "^5.0.0"
+  }
+}
