@@ -1,4 +1,4 @@
-import { BridgePacket, BridgePacketFactory } from "../network/codec/packet";
+import { BridgePacket, BridgePacketFactory } from "../network";
 
 export function createPacketFactory<T extends BridgePacket>(
     PacketClass: new () => T

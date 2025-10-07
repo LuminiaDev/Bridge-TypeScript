@@ -5,8 +5,8 @@ import {
     BridgePacketHandler,
     BridgeSinglePacketHandler,
     TypedBridgePacketHandler
-} from "./codec/packet";
-import { BridgeCodec } from "./codec/bridge-codec";
+} from "./codec";
+import { BridgeCodec } from "./codec";
 import { BridgeCodecException } from '../exception/bridge-codec-exception';
 
 export abstract class AbstractBridgeNetwork implements BridgeNetwork {
