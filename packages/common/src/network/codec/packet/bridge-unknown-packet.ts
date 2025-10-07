@@ -1,5 +1,5 @@
 import { BridgePacket } from "./bridge-packet";
-import { BridgePacketSerializer } from "./bridge-packet-serializer";
+import { BridgePacketSerializer, BridgePacketSerializerHelper } from "./serializer";
 import ByteBuffer from "bytebuffer";
 
 export class BridgeUnknownPacket implements BridgePacket {
@@ -28,7 +28,7 @@ export class BridgeUnknownPacket implements BridgePacket {
 }
 
 export class BridgeUnknownPacketSerializer implements BridgePacketSerializer<BridgeUnknownPacket> {
-    serialize(buffer: ByteBuffer, packet: BridgeUnknownPacket): void {
+    serialize(buffer: ByteBuffer, helper: BridgePacketSerializerHelper, packet: BridgeUnknownPacket): void {
         const originalId = packet.getOriginalId() || '';
         buffer.writeVString(originalId);
 
@@ -43,7 +43,7 @@ export class BridgeUnknownPacketSerializer implements BridgePacketSerializer<Bri
         }
     }
 
-    deserialize(buffer: ByteBuffer, packet: BridgeUnknownPacket): void {
+    deserialize(buffer: ByteBuffer, helper: BridgePacketSerializerHelper, packet: BridgeUnknownPacket): void {
         packet.setOriginalId(buffer.readVString());
 
         const remaining = buffer.remaining();

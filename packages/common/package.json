@@ -1,6 +1,6 @@
 {
   "name": "@luminiadev/bridge-common",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A library for communicating by sending packets between multiple services",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,7 +20,8 @@
   "author": "Luminia Development",
   "license": "MIT",
   "dependencies": {
-    "bytebuffer": "^5.0.1"
+    "bytebuffer": "^5.0.1",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "typescript": "^5.9.2"

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
-    "publish:all": "npm run build && npm publish --workspaces"
+    "publish:all": "npm run build && npm publish --workspaces",
+    "clean:all": "npm run-script clean --workspaces"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",

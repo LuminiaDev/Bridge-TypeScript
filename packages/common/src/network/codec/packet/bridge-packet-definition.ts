@@ -1,6 +1,6 @@
 import { BridgePacket } from "./bridge-packet";
 import { BridgePacketFactory } from "./bridge-packet-factory";
-import { BridgePacketSerializer } from "./bridge-packet-serializer";
+import { BridgePacketSerializer } from "./serializer";
 
 export class BridgePacketDefinition<T extends BridgePacket> {
     constructor(

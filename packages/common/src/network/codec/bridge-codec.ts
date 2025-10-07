@@ -1,5 +1,5 @@
 import {
-    BridgePacket, BridgePacketDefinition, BridgePacketSerializer, BridgeUnknownPacket,
+    BridgePacket, BridgePacketDefinition, BridgePacketSerializer, BridgePacketSerializerHelper, BridgeUnknownPacket,
     BridgeUnknownPacketSerializer
 } from './packet';
 import { BridgeCodecBuilder } from './bridge-codec-builder';
@@ -47,6 +47,7 @@ export class BridgeCodec {
 
     tryDecode(buffer: ByteBuffer, packetId: string): BridgePacket {
         const definition = this.getPacketDefinition(packetId);
+        const helper = new BridgePacketSerializerHelper(buffer);
 
         let packet: BridgePacket;
         let serializer: BridgePacketSerializer<any>;
@@ -74,11 +75,12 @@ export class BridgeCodec {
             serializer = new BridgeUnknownPacketSerializer();
         }
 
-        serializer.deserialize(buffer, packet);
+        serializer.deserialize(buffer, helper, packet);
         return packet;
     }
 
     tryEncode<T extends BridgePacket>(buffer: ByteBuffer, packet: T): void {
+        const helper = new BridgePacketSerializerHelper(buffer);
         let serializer: BridgePacketSerializer<T>;
 
         if (packet instanceof BridgeUnknownPacket) {
@@ -91,7 +93,7 @@ export class BridgeCodec {
             serializer = definition.getSerializer();
         }
 
-        serializer.serialize(buffer, packet);
+        serializer.serialize(buffer, helper, packet);
     }
 
     toBuilder(): BridgeCodecBuilder {
