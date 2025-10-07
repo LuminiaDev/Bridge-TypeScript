@@ -1,12 +1,16 @@
-import { BridgeCodec } from "./codec/bridge-codec";
-import { BridgePacket, BridgePacketHandler } from "./codec/packet";
+import { BridgeCodec, BridgePacketConstructor } from "./codec";
+import { BridgePacket, BridgePacketHandler, BridgeSinglePacketHandler } from "./codec";
 
 export interface BridgeNetwork {
     getServiceId(): string;
     setCodec(codec: BridgeCodec): void;
     getCodec(): BridgeCodec | null;
     getPacketHandlers(): ReadonlySet<BridgePacketHandler>;
-    addPacketHandler(handler: BridgePacketHandler): void;
+    addPacketHandler(handler: BridgePacketHandler): BridgePacketHandler;
+    addTypedPacketHandler<T extends BridgePacket>(
+        packetType: BridgePacketConstructor<T>,
+        handler: BridgeSinglePacketHandler<T>
+    ): BridgePacketHandler;
     removePacketHandler(handler: BridgePacketHandler): void;
     sendPacket<T extends BridgePacket>(packet: T): void;
     tryDecode(buffer: ByteBuffer, packetId: string): BridgePacket;
