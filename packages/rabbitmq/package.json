@@ -1,6 +1,6 @@
 {
   "name": "@luminiadev/bridge-rabbitmq",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A Bridge library for communication between multiple services, based on RabbitMQ",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
   "author": "Luminia Development",
   "license": "MIT",
   "dependencies": {
-    "@luminiadev/bridge-common": "^1.0.3",
+    "@luminiadev/bridge-common": "^1.1.0",
     "amqplib": "^0.10.9",
     "uuid": "^13.0.0"
   },
