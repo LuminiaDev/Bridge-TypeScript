@@ -1,5 +1,10 @@
 import {
-    BridgePacket, BridgePacketDefinition, BridgePacketSerializer, BridgePacketSerializerHelper, BridgeUnknownPacket,
+    BridgePacket,
+    BridgePacketConstructor,
+    BridgePacketDefinition,
+    BridgePacketSerializer,
+    BridgePacketSerializerHelper,
+    BridgeUnknownPacket,
     BridgeUnknownPacketSerializer
 } from './packet';
 import { BridgeCodecBuilder } from './bridge-codec-builder';
@@ -15,9 +20,9 @@ export class BridgeCodec {
     }
 
     getPacketDefinition(id: string): BridgePacketDefinition<any> | null;
-    getPacketDefinition<T extends BridgePacket>(classOf: new () => T): BridgePacketDefinition<T> | null;
+    getPacketDefinition<T extends BridgePacket>(classOf: BridgePacketConstructor<T>): BridgePacketDefinition<T> | null;
     getPacketDefinition<T extends BridgePacket>(
-        idOrClass: string | (new () => T)
+        idOrClass: string | BridgePacketConstructor<T>
     ): BridgePacketDefinition<any> | null {
         if (typeof idOrClass === 'string') {
             return this.packetsById.get(idOrClass) || null;

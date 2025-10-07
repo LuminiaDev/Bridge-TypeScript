@@ -1,7 +1,7 @@
-import { BridgePacket, BridgePacketFactory } from "../network";
+import { BridgePacket, BridgePacketConstructor, BridgePacketFactory } from "../network";
 
 export function createPacketFactory<T extends BridgePacket>(
-    PacketClass: new () => T
+    PacketClass: BridgePacketConstructor<T>
 ): BridgePacketFactory<T> {
     return {
         create: () => new PacketClass(),
