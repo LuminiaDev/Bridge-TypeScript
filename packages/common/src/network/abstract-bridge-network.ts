@@ -1,6 +1,12 @@
 import { BridgeNetwork } from './bridge-network';
-import { BridgePacket, BridgePacketHandler } from "./codec/packet";
-import { BridgeCodec } from "./codec/bridge-codec";
+import {
+    BridgePacket,
+    BridgePacketConstructor,
+    BridgePacketHandler,
+    BridgeSinglePacketHandler,
+    TypedBridgePacketHandler
+} from "./codec";
+import { BridgeCodec } from "./codec";
 import { BridgeCodecException } from '../exception/bridge-codec-exception';
 
 export abstract class AbstractBridgeNetwork implements BridgeNetwork {
@@ -24,8 +30,17 @@ export abstract class AbstractBridgeNetwork implements BridgeNetwork {
         return new Set(this.handlers);
     }
 
-    addPacketHandler(handler: BridgePacketHandler): void {
+    addPacketHandler(handler: BridgePacketHandler): BridgePacketHandler {
         this.handlers.add(handler);
+        return handler;
+    }
+
+    addTypedPacketHandler<T extends BridgePacket>(
+        packetType: BridgePacketConstructor<T>,
+        handler: BridgeSinglePacketHandler<T>
+    ): BridgePacketHandler {
+        const typedHandler = new TypedBridgePacketHandler(packetType, handler);
+        return this.addPacketHandler(typedHandler.asHandler());
     }
 
     removePacketHandler(handler: BridgePacketHandler): void {
